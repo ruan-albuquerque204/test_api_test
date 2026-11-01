@@ -6,6 +6,10 @@ USERS_JSON = DATA_FOLDER / "users.json"
 
 
 def load_users() -> dict:
+    if not USERS_JSON.exists():
+        USERS_JSON.write_text(str({}))
+        return {}
+
     return json.loads(USERS_JSON.read_text("utf-8"))
 
 
