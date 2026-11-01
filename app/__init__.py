@@ -7,8 +7,9 @@ app = Flask(__name__)
 
 @app.route("/user/<string:fiscal_number>", methods=["GET"])
 def get_user(fiscal_number: str):
+    fiscal_number = "".join(tuple(filter(str.isdigit, fiscal_number)))
     if not (user_data := configs.load_users().get(fiscal_number)):
-        return jsonify({"code": None, "name": None}), 404
+        return jsonify(), 404
 
     return jsonify(user_data), 200
 

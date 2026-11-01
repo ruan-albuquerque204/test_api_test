@@ -2,8 +2,9 @@ import json
 from pathlib import Path
 
 DATA_FOLDER = Path("data_dev")
-DATA_FOLDER.mkdir(parents=True, exist_ok=True)
 USERS_JSON = DATA_FOLDER / "users.json"
+
+DATA_FOLDER.mkdir(parents=True, exist_ok=True)
 
 
 def load_users() -> dict:
