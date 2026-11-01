@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-import configs
+from . import configs
 
 app = Flask(__name__)
 
