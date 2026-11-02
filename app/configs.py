@@ -1,8 +1,11 @@
 import json
 from pathlib import Path
 
+from . import utils
+
 DATA_FOLDER = Path("data_dev")
 USERS_JSON = DATA_FOLDER / "users.json"
+DEBITS_JSON = DATA_FOLDER / "debits.json"
 
 DATA_FOLDER.mkdir(parents=True, exist_ok=True)
 
@@ -21,3 +24,27 @@ def append_user(fiscal_number: str, name: str):
             json.loads(USERS_JSON.read_text("utf-8")) | {fiscal_number: name}, indent=4
         )
     )
+
+    create_debit(fiscal_number)
+
+
+def load_debits() -> dict | None:
+    if not DEBITS_JSON.exists():
+        return {}
+
+    return json.loads(DEBITS_JSON.read_text("utf-8"))
+
+
+def create_debit(fiscal_number: str):
+    debits = {}
+    if DEBITS_JSON.exists():
+        try:
+            debits: dict = json.loads(DEBITS_JSON.read_text("utf-8"))
+        except:
+            pass
+
+    new_debits = utils.create_debit(10)
+
+    DEBITS_JSON.write_text(json.dumps(debits | {fiscal_number: new_debits}, indent=4))
+
+    return new_debits
