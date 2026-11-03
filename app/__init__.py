@@ -79,7 +79,7 @@ def create_user():
     except:
         return jsonify("Não foi possível salvar o usuário"), 500
 
-    return jsonify("Usuário salvo com sucesso"), 200
+    return jsonify("Usuário salvo com sucesso"), 201
 
 
 @app.route("/health", methods=["GET"])
