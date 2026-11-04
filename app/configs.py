@@ -26,7 +26,12 @@ def load_users() -> dict:
 def append_user(fiscal_number: str, name: str):
     USERS_JSON.write_text(
         json.dumps(
-            json.loads(USERS_JSON.read_text("utf-8")) | {fiscal_number: name}, indent=4
+            (
+                json.loads(USERS_JSON.read_text("utf-8"))
+                if USERS_JSON.exists()
+                else {} | {fiscal_number: name}
+            ),
+            indent=4,
         )
     )
 
