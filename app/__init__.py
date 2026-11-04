@@ -76,7 +76,8 @@ def create_user():
 
     try:
         configs.append_user(code, name)
-    except:
+    except Exception as exc:
+        print("Erro ao registrar usuário", exc)
         return jsonify("Não foi possível salvar o usuário"), 500
 
     return jsonify("Usuário salvo com sucesso"), 201
