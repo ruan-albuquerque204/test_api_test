@@ -1,9 +1,14 @@
+import os
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from . import utils
 
-DATA_FOLDER = Path("data_dev")
+load_dotenv()
+
+DATA_FOLDER = Path(os.getenv("DATA_FOLDER", "data"))
 USERS_JSON = DATA_FOLDER / "users.json"
 DEBITS_JSON = DATA_FOLDER / "debits.json"
 
